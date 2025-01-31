@@ -1,0 +1,126 @@
+<?php
+// Database connection
+$host = "localhost";
+$dbname = "trailventure";
+$username = "root";
+$password = "";
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Collect form data
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    $first_name = trim($_POST['first_name']);
+    $last_name = trim($_POST['last_name']);
+    $address = trim($_POST['address']);
+    $phone = trim($_POST['phone']);
+
+    // Error array to store validation issues
+    $errors = [];
+
+    // Check for empty fields
+    if (empty($username) || empty($email) || empty($password) || empty($confirm_password) ||
+        empty($first_name) || empty($last_name) || empty($address) || empty($phone)) {
+        $errors[] = "All fields are required.";
+    }
+
+    // Check if username is already taken
+    $stmt = $conn->prepare("SELECT * FROM login WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $errors[] = "Username is already taken.";
+    }
+
+    // Check if email is already in use
+    $stmt = $conn->prepare("SELECT * FROM `registered customer` WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $errors[] = "Email is already in use.";
+    }
+
+    // Check if passwords match
+    if ($password !== $confirm_password) {
+        $errors[] = "Passwords do not match.";
+    }
+
+    // If no errors, proceed with registration
+    if (empty($errors)) {
+        // Encrypt the password
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+        // Insert into login table
+        $stmt = $conn->prepare("INSERT INTO login (username, password) VALUES (?, ?)");
+        $stmt->bind_param("ss", $username, $hashed_password);
+        if ($stmt->execute()) {
+            // Get the inserted user ID
+            $login_id = $conn->insert_id;
+
+            // Insert into registered_customer table
+            $stmt = $conn->prepare(
+                "INSERT INTO `registered customer` (username, fname, lname, email, phonenum, address) 
+                 VALUES (?, ?, ?, ?, ?, ?)"
+            );
+            $stmt->bind_param($username, $first_name, $last_name, $email, $phone, $address);
+            if ($stmt->execute()) {
+                echo "Registration successful!";
+            } else {
+                echo "Error registering customer information: " . $conn->error;
+            }
+        } else {
+            echo "Error inserting login information: " . $conn->error;
+        }
+    } else {
+        // Display errors
+        foreach ($errors as $error) {
+            echo "<p>$error</p>";
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+</head>
+<body>
+    <h2>Signup Form</h2>
+    <form method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required><br><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" required><br><br>
+
+        <button type="submit">Signup</button>
+    </form>
+</body>
+</html>

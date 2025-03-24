@@ -177,6 +177,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                     <span>Login</span>
                 </div>
 
+                <div class="trailventure">
+                    <h2>Trailventure</h2>
+                </div>
+
 
                 <div class="input_wrapper">
                     <label for="user" class="label">Username</label>

@@ -136,6 +136,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <span>Signup</span>
             </div>
 
+            
+
+            <div class="container_line1">
+
+              <div class="input_wrapper">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" class = "input_field" value="<?php echo htmlspecialchars($first_name);?>" required>
+                <i class="fa-regular fa-user icon"></i>
+              </div>
+
+              <div class="input_wrapper">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" class = "input_field" value="<?php echo htmlspecialchars($last_name);?>" required>
+                <i class="fa-regular fa-user icon"></i>
+                    
+              </div>
+
+            </div>
+
+            <div class="container_line2">
+
+              <div class="input_wrapper">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" class = "input_field" value="<?php echo htmlspecialchars($phone);?>" required>
+                <?php if (isset($errors['bad_phonenum'])): ?>
+                <p class="error"><?php echo $errors['bad_phonenum']; ?></p>
+                <?php endif; ?>
+                <i class="fa-regular fa-user icon"></i>
+                    
+              </div>
+
+              <div class = "input_wrapper">
+                <label for="address">Address:</label>
+                <input type ="text" id="address" name="address" rows="4" cols="50" class ="input_field" value="<?php echo htmlspecialchars($address);?>" required>
+                <i class="fa-regular fa-user icon"></i>
+              </div>
+
+            </div>
+
             <div class="input_wrapper">
                 <label for="userName">Username:</label>
                 <input type="text" id="userName" name="userName" class="input_field" value="<?php echo htmlspecialchars($username);?>" required>
@@ -177,35 +216,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
                 <i class="fa-regular fa-user icon"></i>
                     
-            </div>
-
-            <div class="input_wrapper">
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName" class = "input_field" value="<?php echo htmlspecialchars($first_name);?>" required>
-                <i class="fa-regular fa-user icon"></i>
-            </div>
-
-            <div class="input_wrapper">
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" class = "input_field" value="<?php echo htmlspecialchars($last_name);?>" required>
-                <i class="fa-regular fa-user icon"></i>
-                    
-            </div>
-
-            <div class="input_wrapper">
-                <label for="phoneNumber">Phone Number:</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" class = "input_field" value="<?php echo htmlspecialchars($phone);?>" required>
-                <?php if (isset($errors['bad_phonenum'])): ?>
-                <p class="error"><?php echo $errors['bad_phonenum']; ?></p>
-                <?php endif; ?>
-                <i class="fa-regular fa-user icon"></i>
-                    
-            </div>
-
-            <div class = "input_wrapper">
-                <label for="address">Address:</label>
-                <input type ="text" id="address" name="address" rows="4" cols="50" class ="input_field" value="<?php echo htmlspecialchars($address);?>" required>
-                <i class="fa-regular fa-user icon"></i>
             </div>
 
             <div class="input_wrapper">

@@ -14,6 +14,11 @@ body{
     background-position: center;
     background-image: url(Hiking4.jpeg);
     background-size: cover;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 a{
@@ -27,11 +32,18 @@ a:hover{
 .container {
     display: flex;
     width: 100%;
-    min-height: 100vh; /* to fit the screen*/
+    flex-grow: 1;
+    
     justify-content: center;
     align-items: center;
     background-color: rgba(0,0,0,0.2);
+    flex-direction: column;
 }
+
+.container, .login_container, .wave-btn {
+    transition: all 0.3s ease-in-out;
+}
+
 
 .login_container{
     position: relative;
@@ -42,13 +54,13 @@ a:hover{
     border-radius: 15px;
     box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
     color: var(--second-color);
-    margin-top: 30%;
+    margin-top: 10%;
     
 }
 
 .Welcome{
     position: absolute;
-    left: 36%;
+    left: 36.5%;
     top: 0;
     margin-top: 10%;
     margin-left: 10%;
@@ -61,11 +73,12 @@ a:hover{
     padding: 60px;
     font-size: 400%;
     font-family: "Lucida Calligraphy", cursive, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .quote{
     position: absolute;
-    left: 28%;
+    left: 33.5%;
     top: 0;
     margin-top: 14%; 
     width: 140px; 
@@ -75,6 +88,7 @@ a:hover{
     font-size: 200%;
     font-family: "Lucida Calligraphy", cursive, sans-serif;
     white-space: nowrap; /* Prevent line breaks */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 
@@ -91,8 +105,16 @@ a:hover{
     height: 55px;
     color: white;
     background: #0369a1;
-    border: 2px solid var(--primary-color);        
+    border: 2px solid var(--primary-color);
+    cursor: pointer;        
 }
+
+.button:hover {
+    background-color: #005f8c; /* Darker shade */
+    transform: scale(1.05);  /* Slightly enlarge the button */
+    transition: transform 0.3s ease-in-out;
+}
+
 
 .line_container{
     display: flex;
@@ -179,6 +201,12 @@ a:hover{
     box-shadow: 5px -5px 22px #075985, inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.wave-btn:hover {
+    background-color: #005f8c; /* Darker shade */
+    transform: scale(1.05);  /* Slightly enlarge the button */
+    transition: transform 0.3s ease-in-out;
+}
+
 .wave::after,
 .wave::before{
     content: "";
@@ -224,3 +252,13 @@ a:hover{
         transform: rotate(360deg);
     }
 }
+
+footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: relative;
+}
+

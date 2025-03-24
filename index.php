@@ -4,7 +4,7 @@
         <meta charset= "UTF-8">
         <meta name="viewport" content = "width=device-width, initial-scale=1.0"> <!-- Ajust website to amy devise without any zoom-->
         <Title>Welcome page</Title>
-        <link rel ="stylesheet" href="welcomepagestyle.css">
+        <link rel ="stylesheet" href="index.css">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         
     </head>
@@ -61,14 +61,13 @@
                
 
                <div  class="button_position">
-                    <a href="signup.php"> <button class="wave-btn">
-                    <span class="wave"></span>
-                    <span class="wave-text">Signup</button></a>
+                    <a href="signup.php"> 
+                        <button class="button">Signup</button></a>
                </div>
-
 
             </div>
         </div>
+        <footer><p>&copy; 2025 Trailventure. All Rights Reserved.</p></footer>
     </body>
 
 </html>

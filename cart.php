@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button type="submit">Update Cart</button>
     </form>
 
-    <a href="checkout.php">Proceed to Checkout</a> | <a href="shop.php">Continue Shopping</a>
+    <a href="checkout.php">Proceed to Checkout</a> | <a href="buynow.php">Continue Shopping</a>
      <!-- Form to clear the cart -->
      <form action="cart.php" method="post">
         <button type="submit" name="clear_cart" style="background-color: red; color: white;">Clear Cart</button>

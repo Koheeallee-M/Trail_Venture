@@ -12,7 +12,7 @@ $errors[] ="";
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} // Adjust to the actual file that contains the DB connection logic
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     // Get the username and password from the POST request
@@ -164,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         <meta charset= "UTF-8">
         <meta name="viewport" content = "width=device-width, initial-scale=1.0"> <!-- Ajust website to amy devise without any zoom-->
         <Title>Login Form</Title>
-        <link rel ="stylesheet" href="loginstyle.css">
+        <link rel ="stylesheet" href="css/loginstyle.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> <!-- Reference from "font awesome for icon"-->
     </head>
 

@@ -4,7 +4,7 @@
         <meta charset= "UTF-8">
         <meta name="viewport" content = "width=device-width, initial-scale=1.0"> <!-- Ajust website to amy devise without any zoom-->
         <Title>Welcome page</Title>
-        <link rel ="stylesheet" href="index.css">
+        <link rel ="stylesheet" href="css/index.css">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         
     </head>
@@ -19,7 +19,7 @@
             </div>
 
             <div class="image">
-                <img src="Logo.jpeg">
+                <img src="images/Logo.jpeg">
             </div>
 
             <div class="Welcome">

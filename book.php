@@ -8,12 +8,47 @@ if (!isset($_SESSION['userName'])) {
     header("Location: login.php");
     exit;
 }
-
+/* WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
+   WIP
 require_once 'includes/dbconnect.php'; // Database connection file
 
 
 // Fetch all products from the database
+$sql = "SELECT * FROM bookings;";
+$result = mysqli_query($conn, $sql);
+$resultCheck = mysqli_num_rows($result);
 
+if($resultCheck > 0){
+  while($row = mysqli_fetch_assoc($result)){
+    $row[] =[
+      'venue' => $venue,
+      'date' => $date,
+      'start' => $start,
+      'length' => $length,
+      'price' => $price,
+      'tour_guide' => $tour_guide,
+      'image' => $image
+    ];
+  }
+}
+
+
+*/
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +57,7 @@ require_once 'includes/dbconnect.php'; // Database connection file
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booklist</title>
-    <link rel="stylesheet" href="book.css">
+    <link rel="stylesheet" href="css/book.css">
 </head>
 
 <body>
@@ -31,7 +66,7 @@ require_once 'includes/dbconnect.php'; // Database connection file
 
         <header>
           <div class="horizontal_bar">
-            <div class="logo-img"><img src="logo.png" alt=""></div>
+            <div class="logo-img"><img src="images/logo.png" alt=""></div>
             <p class="Trail-position">Trailventure</p> 
             <div class="title">Booking</div> 
           </div> 
@@ -39,7 +74,7 @@ require_once 'includes/dbconnect.php'; // Database connection file
 
         <div class="listProduct">
            <div class="item">
-            <img src="7cascades.jpeg" alt="">
+            <img src="images/7cascades.jpeg" alt="">
             <br><br>
             <h2>Venue: Seven Cascades <br><br></h2>
 
@@ -60,7 +95,7 @@ require_once 'includes/dbconnect.php'; // Database connection file
            </div>
 
            <div class="item">
-            <img src="LeMorne.jpeg" alt="">
+            <img src="images/LeMorne.jpeg" alt="">
             <br><br>
             <h2>Venue: Le Morne Brabant <br><br></h2>
 
@@ -81,7 +116,7 @@ require_once 'includes/dbconnect.php'; // Database connection file
            </div>
 
            <div class="item">
-            <img src="LePouce.jpeg" alt="">
+            <img src="images/LePouce.jpeg" alt="">
             <br><br>
             <h2>Venue: Le Pouce <br><br></h2>
 
@@ -99,6 +134,8 @@ require_once 'includes/dbconnect.php'; // Database connection file
             
             <br><div class="price">Rs400</div>
             <a href="confirmbooking.php"><button class="addCart">Book</button></a>
+
+
            </div>
 
         </div>

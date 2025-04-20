@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <meta charset= "UTF-8">
         <meta name="viewport" content = "width=device-width, initial-scale=1.0"> <!-- Ajust website to amy devise without any zoom-->
         <Title>Signup Page</Title>
-        <link rel ="stylesheet" href="signupstyle.css">
+        <link rel ="stylesheet" href="css/signupstyle.css">
         
         <style>
             textarea{

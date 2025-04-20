@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
            </div>
 
            <div class="item">
-            <img src="Shirt.jpg" alt="">
+            <img src="images/Shirt.jpg" alt="">
             <h2><?php echo htmlspecialchars($items[2]['item_name']) ?><br><br></h2>
             <p>Product Description: <br><br><?php echo htmlspecialchars($items[2]['description']) ?></p>
             <br><div class="price">Rs <?php echo htmlspecialchars($items[2]['list_price']) ?></div>
@@ -88,7 +88,7 @@ if ($result->num_rows > 0) {
 
         <div class="listProduct">
             <div class="item">
-             <img src="pants.jpg" alt="">
+             <img src="images/pants.jpg" alt="">
              <h2><?php echo htmlspecialchars($items[3]['item_name']) ?><br><br></h2>
              <p>Product Description: <br><br><?php echo htmlspecialchars($items[3]['description']) ?></p>
              <br><div class="price">Rs <?php echo htmlspecialchars($items[3]['list_price']) ?></div>
@@ -96,7 +96,7 @@ if ($result->num_rows > 0) {
             </div>
  
             <div class="item">
-             <img src="Cap.jpg" alt="">
+             <img src="images/Cap.jpg" alt="">
              <h2><?php echo htmlspecialchars($items[4]['item_name']) ?><br><br></h2>
              <p>Product Description: <br><br><?php echo htmlspecialchars($items[4]['description']) ?></p>
              <br><div class="price">Rs <?php echo htmlspecialchars($items[4]['list_price']) ?></div>
@@ -104,7 +104,7 @@ if ($result->num_rows > 0) {
             </div>
  
             <div class="item">
-             <img src="Ropes.jpg" alt="">
+             <img src="images/Ropes.jpg" alt="">
              <h2><?php echo htmlspecialchars($items[5]['item_name']) ?><br><br></h2>
              <p>Product Description: <br><br><?php echo htmlspecialchars($items[5]['description']) ?></p>
              <br><div class="price">Rs <?php echo htmlspecialchars($items[5]['list_price']) ?></div>
@@ -122,7 +122,7 @@ if ($result->num_rows > 0) {
         <div class="listCart">
             <div class="item">
                 <div class="image">
-                    <img src="Shoes.jpg" alt="">
+                    <img src="images/Shoes.jpg" alt="">
                 </div>
                 <div class="name">
                     Salomon Shoes Alphacross

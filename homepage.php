@@ -20,7 +20,7 @@ if (!isset($_SESSION['userName'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
-    <link rel="stylesheet" href="homepage.css" />
+    <link rel="stylesheet" href="css/homepage.css" />
     <title>TrailVenture page</title>
   </head>
 
@@ -30,7 +30,7 @@ if (!isset($_SESSION['userName'])) {
       <nav>
         <div class="nav__bar">
           <a href="#" class="nav__logo">
-            <img src="logo.png" alt="logo" />
+            <img src="images/logo.png" alt="logo" />
             <span>TrailVenture</span>
           </a>
           <div class="nav__menu__btn" id="menu-btn">
@@ -48,9 +48,9 @@ if (!isset($_SESSION['userName'])) {
       </nav>
 
       <div class="container__grid">
-        <img src="bg-dots.png" alt="bg" class="bg__1" />
-        <img src="bg-dots.png" alt="bg" class="bg__2" />
-        <img src="bg-dots.png" alt="bg" class="bg__3" />
+        <img src="images/bg-dots.png" alt="bg" class="bg__1" />
+        <img src="images/bg-dots.png" alt="bg" class="bg__2" />
+        <img src="images/bg-dots.png" alt="bg" class="bg__3" />
         <div class="container__image">
           <div></div>
         </div>

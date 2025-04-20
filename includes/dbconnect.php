@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$dbname = "new_trailventure";
+$dbname = "trailventure";
 $dbusername = "root";
 $dbpassword = "";
 $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);

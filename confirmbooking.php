@@ -17,14 +17,14 @@ if (!isset($_SESSION['userName'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
-    <link rel="stylesheet" href="confirmbooking.css">
+    <link rel="stylesheet" href="css/confirmbooking.css">
 </head>
 <body>
     
 <div class="container">
 
     <div class="horizontal_bar">
-        <div class="logo-img"><img src="logo.png" alt=""></div>
+        <div class="logo-img"><img src="images/logo.png" alt=""></div>
         <p class="Trail-position">Trailventure</p>
         <div class="title">Booking</div>
     </div>

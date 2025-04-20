@@ -10,13 +10,35 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cust_id = $_SESSION['cust_id'];
+   
+
+    $checkCustomer = $conn->prepare("SELECT cust_id FROM `registered customer` WHERE cust_id = ?");
+    $checkCustomer->bind_param("i", $cust_id);
+    $checkCustomer->execute();
+    $checkCustomer->store_result();
+
+    if($checkCustomer->num_rows === 0){
+        die("Error: Invalid customer ID");
+    }
+
     $totalAmount = 0;
 
     // Prepare statements for purchases and purchase details
     $purchaseStmt = $conn->prepare("INSERT INTO purchases (cust_id, date, total) VALUES (?, NOW(), ?)");
-    $result = $conn->query("SELECT MAX(pur_id) AS highest_pur_id FROM purchases");
+    /*$result = $conn->query("SELECT MAX(pur_id) AS highest_pur_id FROM purchases");
     $row = $result->fetch_assoc();
-    $nextpur_id = $row['highest_pur_id'] + 1; // Increment for new pur_id
+    $nextpur_id = $row['highest_pur_id'] + 1; // Increment for new pur_id*/
+    $purchaseStmt->bind_param("id", $cust_id, $totalAmount);
+    
+    foreach ($_SESSION['cart'] as $item_id => $item) {
+        $totalAmount += $item['list_price'] * $item['quantity'];
+    }
+    
+    // Then insert into purchases
+    $purchaseStmt->bind_param("id", $cust_id, $totalAmount);
+    $purchaseStmt->execute();
+    $nextpur_id = $conn->insert_id;
+
     $purchaseDetailStmt = $conn->prepare("INSERT INTO `purchases details` (pur_id, cust_id, item_id, item_name, price_paid, qty, discount) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
     foreach ($_SESSION['cart'] as $item_id => $item) {
@@ -54,11 +76,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
 
     // Clear the cart after successful purchase
-    unset($_SESSION['cart']);
+    /*unset($_SESSION['cart']);
 
     echo "<h2>Thank you for your purchase!</h2>";
     echo "<p>Your total amount is: $" . number_format($totalAmount, 2) . "</p>";
-    echo "<p><a href='shop.php'>Continue Shopping</a></p>";
+    echo "<p><a href='shop.php'>Continue Shopping</a></p>";*/
+    // Inside your POST handling block:
+
+// Clear the cart after successful purchase
+    unset($_SESSION['cart']);
+
+    $_SESSION['purchase_success'] = true;
+    $_SESSION['purchase_total'] = $totalAmount;
+
+    header("Location: buynow.php");
+    exit();
 }
 
 // Fetch cart details for display

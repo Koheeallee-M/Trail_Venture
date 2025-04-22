@@ -8,47 +8,34 @@ if (!isset($_SESSION['userName'])) {
     header("Location: login.php");
     exit;
 }
-/* WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-   WIP
-require_once 'includes/dbconnect.php'; // Database connection file
 
+require_once 'includes/dbconnect.php'; 
 
-// Fetch all products from the database
-$sql = "SELECT * FROM bookings;";
+$sql = "SELECT b.*, 
+        t.fname AS fname,
+        t.lname AS lname,
+        t.phonenum AS phonenum,
+        t.email AS email
+        FROM bookings b
+        INNER JOIN `tour guides` t
+        ON b.tour_guide = t.username;";
+
 $result = mysqli_query($conn, $sql);
 $resultCheck = mysqli_num_rows($result);
 
-if($resultCheck > 0){
+if (!$result){
+  die("Database error: " . mysqli_error($conn));
+}
+
+$bookings = [];
+if (mysqli_num_rows($result) > 0){
   while($row = mysqli_fetch_assoc($result)){
-    $row[] =[
-      'venue' => $venue,
-      'date' => $date,
-      'start' => $start,
-      'length' => $length,
-      'price' => $price,
-      'tour_guide' => $tour_guide,
-      'image' => $image
-    ];
+    $row['name'] = $row['fname'] . ' ' .$row['lname'];
+    $bookings[] = $row;
   }
 }
 
-
-*/
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -73,71 +60,35 @@ if($resultCheck > 0){
         </header>
 
         <div class="listProduct">
-           <div class="item">
-            <img src="images/7cascades.jpeg" alt="">
+          <?php if(!empty($bookings)): ?>
+            <?php foreach($bookings as $booking): ?>
+            <div class="item">
+            <img src="images/<?= htmlspecialchars($booking['image'])?>" alt="">
             <br><br>
-            <h2>Venue: Seven Cascades <br><br></h2>
+            <h2>Venue: <?= htmlspecialchars($booking['venue'])?> <br><br></h2>
 
             <h4>Description <br></h4>
-            <p>Date: 10/11/2024 <br></p>
-            <p>Start: 10am <br></p>
-            <p>Length: 2.1km <br><br></p>
+            <p>Date: <?= htmlspecialchars($booking['date'])?> <br></p>
+            <p>Start: <?= htmlspecialchars($booking['start'])?> <br></p>
+            <p>Length: <?= htmlspecialchars($booking['length'])?> <br><br></p>
 
 
             <h4>Tour Details<br></h4>
-            <p>Name: Kai Havertz <br></p>
-            <p>Phone Number: +230 58325136 <br></p>
-            <p>Email: Kai7@gmail.com <br></p>
+            <p>Name: <?= htmlspecialchars($booking['name'])?> <br></p>
+            <p>Phone Number: <?= htmlspecialchars($booking['phonenum'])?><br></p>
+            <p>Email: <?= htmlspecialchars($booking['email'])?> <br></p>
 
             
-            <br><div class="price">Rs300</div>
-            <button class="addCart">Book</button>
-           </div>
-
-           <div class="item">
-            <img src="images/LeMorne.jpeg" alt="">
-            <br><br>
-            <h2>Venue: Le Morne Brabant <br><br></h2>
-
-            <h4>Description <br></h4>
-            <p>Date: 15/11/2024 <br></p>
-            <p>Start: 11am <br></p>
-            <p>Length: 6.6km <br><br></p>
-
-
-            <h4>Tour Details<br></h4>
-            <p>Name: William Saliba <br></p>
-            <p>Phone Number: +230 58221205 <br></p>
-            <p>Email: Wsali@gmail.com <br></p>
-
-            
-            <br><div class="price">Rs500</div>
-            <button class="addCart">Book</button>
-           </div>
-
-           <div class="item">
-            <img src="images/LePouce.jpeg" alt="">
-            <br><br>
-            <h2>Venue: Le Pouce <br><br></h2>
-
-            <h4>Description <br></h4>
-            <p>Date: 17/11/2024 <br></p>
-            <p>Start: 11am <br></p>
-            <p>Length: 4.3km <br><br></p>
-
-
-            <h4>Tour Details<br></h4>
-            <p>Name: Bukayo Saka<br></p>
-            <p>Phone Number: +230 59981291 <br></p>
-            <p>Email: Bsaka@gmail.com <br></p>
-
-            
-            <br><div class="price">Rs400</div>
+            <br><div class="price">Rs <?= htmlspecialchars($booking['price'])?></div>
             <a href="confirmbooking.php"><button class="addCart">Book</button></a>
-
-
-           </div>
-
+          </div>
+          <?php endforeach; ?>
+            
+      </div>
+        
+        <?php else: ?>
+          <p>No bookings available.</p>
+        <?php endif; ?>
         </div>
         
         <br><br><br><br><br><br><br><br><br><br><br><br>

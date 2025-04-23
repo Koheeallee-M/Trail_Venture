@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $last_name = trim($_POST['lastName']);
     $address = trim($_POST['address']);
     $phone = trim($_POST['phoneNumber']);
-    $type = 1;
+    $type = 0;
 
     // Error array to store validation issues
     $errors = [];
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Insert into registered customer table
             $stmt = $conn->prepare(
-                "INSERT INTO `registered customer` (username, fname, lname, email, phonenum, address) 
+                "INSERT INTO `registered customer` (username, fname, lname, email, phonenum, `address`) 
                  VALUES (?, ?, ?, ?, ?, ?)"
             );
             // Corrected bind_param with proper type definition string "ssssss" for six strings

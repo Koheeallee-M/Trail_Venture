@@ -24,64 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         echo "Both fields are required!";
         exit;
     }
-/*
-    function validatePassword($conn, $username, $password, $tableName) {
-        // SQL query to fetch username and password from the table
-        $sql = "SELECT * FROM $tableName WHERE username = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            // If the username is found, fetch the data
-            $row = $result->fetch_assoc();
-            // Verify the password (assuming passwords are hashed)
-            if (password_verify($password, $row['password'])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    $isPasswordValid = false;
-
-    // Check if password is valid in registered_customer
-    if (validatePassword($conn, $username, $password, 'registered customer')) {
-        $isPasswordValid = true;
-        $tableFound = `registered customer`;
-    }
-    // Check if password is valid in tour_guide
-    elseif (validatePassword($conn, $username, $password, `tour guides`)) {
-        $isPasswordValid = true;
-        $tableFound = `tour_guides`;
-    }
-    // Check if password is valid in admin
-    elseif (validatePassword($conn, $username, $password, 'admin')) {
-        $isPasswordValid = true;
-        $tableFound = 'admin';
-    }
-    
-    if ($isPasswordValid) {
-        if ($tableFound == `registered customer`) {
-            $type = 1; // Registered customer
-        } elseif ($tableFound == `tour guides`) {
-            $type = 2; // Tour guide
-        } elseif ($tableFound == 'admin') {
-            $type = 3; // Admin
-        }
-        $_SESSION['userName'] = $user['username'];
-        $_SESSION['firstName'] = $user['fname'];
-        $_SESSION['lastName'] = $user['lname'];
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['phoneNumber'] = $user['phonenum'];
-        $_SESSION['type'] = $user[];
-
-        header("Location: homepage.php");
-        exit;
-    }
-
-*/
     // Prepare the SQL query to fetch the hashed password
     $stmt = $conn->prepare(" SELECT password FROM login 
         WHERE username = ?
@@ -106,23 +49,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     // Get the result
     $result = $stmt->get_result();
 
+    $stmt->close();
+
     // Check if the username exists
     if ($result->num_rows === 1) {
         // Fetch the hashed password from the database
         $row = $result->fetch_assoc();
         $hashed_password = $row['password'];
 
+        $result->free();
+       
+
         // Verify the password
         if (password_verify($password, $hashed_password)) {
             // Password is correct, start the session
-            $stmt = $conn->prepare("
-            SELECT cust_id, username, fname, lname, email, phonenum FROM `registered customer` WHERE username = ?
-            UNION
-            SELECT guide_id, username, fname, lname, email, phonenum FROM `tour guides` WHERE username = ?
+             // Check the type of user
+             $stmtType = $conn->prepare("SELECT `type` FROM login WHERE username = ?");
+             $stmtType->bind_param("s", $username);
+             $stmtType->execute();
+
+             
+             $stmtType->store_result();  
+             $stmtType->bind_result($type);  
+
+             if ($stmtType->fetch()) {
+             $type = (int)$type; 
+             } else {
+            die("User not found or type missing.");
+             }
+
+            $stmtType->close();
+            $_SESSION['type'] = $type;
+
+
+
+            if($type === 2){
+                //User is an admin
+                $stmtAdmin = $conn->prepare("
+                SELECT admin_id, username
+                FROM admin
+                WHERE username = ?"
+            );
+
+                $stmtAdmin->bind_param("s", $username);
+                $stmtAdmin->execute();
+                $admin_result = $stmtAdmin->get_result();
+
+                $admin = $admin_result->fetch_assoc();
+
+                $stmtAdmin->close();
+
+                $_SESSION['admin_id'] = $admin['admin_id'];
+                $_SESSION['username'] = $admin['username'];
+
+                // Redirect to the admin page
+                header('Location: Admin/adminland.php');
+                exit;
+            }
+            else if($type === 0){
+            $stmtcust = $conn->prepare("
+            SELECT cust_id, username, fname, lname, email, phonenum, address FROM `registered customer` WHERE username = ?
             ");
-            $stmt->bind_param("ss", $username, $username);
-            $stmt->execute();
-            $user_result = $stmt->get_result();
+            $stmtcust->bind_param("s", $username);
+            $stmtcust->execute();
+            $user_result = $stmtcust->get_result();
+
+            $stmtcust->close();
 
             if ($user_result->num_rows === 1) {
                 // Fetch user details
@@ -134,13 +126,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $_SESSION['firstName'] = $user['fname'];
                 $_SESSION['lastName'] = $user['lname'];
                 $_SESSION['email'] = $user['email'];
-                $_SESSION['address'] = $address;
+                $_SESSION['address'] = $user['address'];
                 $_SESSION['phoneNumber'] = $user['phonenum'];
 
-            // Redirect to the welcome page or dashboard
+            // Redirect to the welcome page
+                echo "Reached header";
                 header("Location: homepage.php");
                 exit;
             }
+            }
+            else if($type === 1){
+                $stmttour = $conn->prepare("
+                SELECT guide_id, username, fname, lname, email, phonenum FROM `tour guides` WHERE username = ?
+                ");
+                $stmttour->bind_param("s", $username);
+                $stmttour->execute();
+                $user_result = $stmttour->get_result();
+
+                $stmttour->close();
+    
+                if ($user_result->num_rows === 1) {
+                    // Fetch user details
+                    $user = $user_result->fetch_assoc();
+    
+                    // Store user data in session
+                    $_SESSION['guide_id'] = $user['guide_id'];
+                    $_SESSION['userName'] = $user['username'];
+                    $_SESSION['firstName'] = $user['fname'];
+                    $_SESSION['lastName'] = $user['lname'];
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['phoneNumber'] = $user['phonenum'];
+    
+                // Redirect to the book page
+                    header("Location: book.php");
+                    exit;
+                }   
+            }
+
+
         } else {
             // Invalid password
             $errors["wrong_password"] = "Invalid Password!";
@@ -151,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Close the statement and connection
-    $stmt->close();
+    
     $conn->close();
 }
 ?>

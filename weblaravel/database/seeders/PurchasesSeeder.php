@@ -6,13 +6,13 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Customer;
+use App\Models\Customers;
 
 class PurchasesSeeder extends Seeder
 {
     public function run()
     {
-        $customers = Customer::all();
+        $customers = Customers::all();
 
         foreach ($customers as $cust) {
             $purchasesCount = rand(1, 3); // Each customer can make 1–3 purchases
@@ -20,7 +20,7 @@ class PurchasesSeeder extends Seeder
                 DB::table('purchases')->insert([
                     'cust_id'    => $cust->id,
                     'date'       => now()->subDays(rand(0, 30))->toDateString(),
-                    'total'      => 0, // updated later in purchase_details
+                    'total'      => 0, // updated later in purchases_details
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

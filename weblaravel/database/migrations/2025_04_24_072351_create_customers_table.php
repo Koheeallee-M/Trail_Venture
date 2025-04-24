@@ -9,7 +9,7 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->id(); // This is the 'cust_id' we'll use
+            $table->cust_id(); // This is the 'cust_id' we'll use
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamps();

@@ -18,9 +18,9 @@ class PurchasesDetails extends Model
         return $this->belongsTo(Purchases::class, 'pur_id', 'pur_id');
     }
 
-    public function customer()
+    public function customers()
     {
-        return $this->belongsTo(Customer::class, 'cust_id', 'cust_id');
+        return $this->belongsTo(Customers::class, 'cust_id', 'cust_id');
     }
 
     public function item()

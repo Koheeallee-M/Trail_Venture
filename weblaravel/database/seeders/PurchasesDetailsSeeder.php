@@ -16,7 +16,7 @@ class PurchasesDetailsSeeder extends Seeder
         $purchases = Purchases::all();
         $items = Item::all();
 
-        foreach ($purchases as $purchase) {
+        foreach ($purchases as $purchases) {
             $itemsUsed = $items->random(rand(1, 3)); // 1–3 items per purchase
             $total = 0;
 
@@ -28,8 +28,8 @@ class PurchasesDetailsSeeder extends Seeder
 
                 // insert into purchases_details
                 DB::table('purchases_details')->insertOrIgnore([
-                    'pur_id'     => $purchase->pur_id,
-                    'cust_id'    => $purchase->cust_id,
+                    'pur_id'     => $purchases->pur_id,
+                    'cust_id'    => $purchases->cust_id,
                     'item_id'    => $item->item_id,
                     'item_name'  => $item->item_name,
                     'price_paid' => $price,
@@ -41,7 +41,7 @@ class PurchasesDetailsSeeder extends Seeder
 
             // update total in purchases table
             DB::table('purchases')
-                ->where('pur_id', $purchase->pur_id)
+                ->where('pur_id', $purchases->pur_id)
                 ->update(['total' => $total]);
         }
     }

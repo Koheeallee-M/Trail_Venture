@@ -12,9 +12,9 @@ class Purchases extends Model
     protected $primaryKey = 'pur_id';
     protected $fillable = ['cust_id', 'date', 'total'];
 
-    public function customer()
+    public function customers()
     {
-        return $this->belongsTo(Customer::class, 'cust_id', 'cust_id');
+        return $this->belongsTo(Customers::class, 'cust_id', 'cust_id');
     }
 
     public function purchasesDetails()

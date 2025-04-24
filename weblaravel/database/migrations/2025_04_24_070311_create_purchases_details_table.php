@@ -22,7 +22,7 @@ class CreatePurchasesDetailsTable extends Migration
             $table->unique(['pur_id', 'cust_id', 'item_id']);
 
             $table->foreign('pur_id')->references('pur_id')->on('purchases')->onDelete('cascade');
-            // $table->foreign('cust_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('cust_id')->references('cust_id')->on('customers')->onDelete('cascade');
             $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
         });
     }

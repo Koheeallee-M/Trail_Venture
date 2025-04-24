@@ -82,7 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $_SESSION['type'] = $type;
 
 
-
             if($type === 2){
                 //User is an admin
                 $stmtAdmin = $conn->prepare("
@@ -103,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 $_SESSION['username'] = $admin['username'];
 
                 // Redirect to the admin page
-                header('Location: Admin/adminland.php');
+                header('Location: Admin/adminwelcomepage.php');
                 exit;
             }
             else if($type === 0){

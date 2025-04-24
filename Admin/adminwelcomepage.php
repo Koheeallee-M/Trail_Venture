@@ -29,12 +29,14 @@ if(!isset($_SESSION['admin_id']) || (!($_SESSION['type'] === 2))) {
         </div>
 
         <div class="Welcome">
-            <p>Welcome <span id="admin-name">xxx</span></p>
+            <p>Welcome <span id="admin-name"><?php echo $_SESSION['username']?></span></p>
         </div>
 
         <div class="button-container">
             <button class="admin_button">Manage Item</button>
             <button class="admin_button">Manage Booking</button>
+            <a href="manageguides.php"><button class="admin_button">Manage Tour Guides</button>
+            <a href="createadmin.php"><button class="admin_button">Create Admin</button></a>
         </div>
         
         

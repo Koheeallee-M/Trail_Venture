@@ -34,7 +34,7 @@ if(!isset($_SESSION['admin_id']) || (!($_SESSION['type'] === 2))) {
 
         <div class="button-container">
             <button class="admin_button">Manage Item</button>
-            <button class="admin_button">Manage Booking</button>
+            <a href="managebookings.php"><button class="admin_button">Manage Booking</button></a>
             <a href="manageguides.php"><button class="admin_button">Manage Tour Guides</button>
             <a href="createadmin.php"><button class="admin_button">Create Admin</button></a>
         </div>

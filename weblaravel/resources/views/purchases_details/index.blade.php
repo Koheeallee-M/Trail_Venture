@@ -75,5 +75,8 @@
       <a href="{{ $purchases_details->nextPageUrl() }}" class="btn btn-primary">Next</a>
     @endif
   </div>
+  <div class="mt-3">
+    <a href="{{ route('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+  </div>
 </div>
 @endsection

@@ -45,5 +45,8 @@
         @endforeach
     </tbody>
   </table>
+  <div class="mt-3">
+    <a href="{{ route('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+  </div>
 </div>
 @endsection

@@ -91,8 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['email'] = $email;
                 $_SESSION['phoneNumber'] = $phone;
                 $_SESSION['tour_id'] = $tour_id;
-                // Redirect to success or login page
-                header("Location: homepage.php");
+                // Redirect to success or manageguides page
+                header("Location: manageguides.php");
                 exit();
             } else {
                 echo "Error registering tour guide information: " . $conn->error;
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class = "login_container">
 
             <div class="login_title">
-                    <span>Signup</span>
+                    <span>Create Tour Guide</span>
             </div>
 
             
@@ -218,10 +218,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if (isset($errors['empty_fields'])): ?>
                 <p class="error"><?php echo $errors['empty_fields']; ?></p>
                 <?php endif; ?>
-            </div>
-
-            <div class="signin">
-                    <span>Already have an account? <a href="login.php">Login</a></span>
             </div>
                 
     </form>

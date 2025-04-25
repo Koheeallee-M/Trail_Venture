@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
+    protected $primaryKey = 'cust_id';
+
+    public function getRouteKeyName()
+{
+    return 'cust_id';
+}
+
+
     public function index()
     {
         $customers = Customers::all();

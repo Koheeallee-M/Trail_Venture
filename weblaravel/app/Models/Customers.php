@@ -9,7 +9,19 @@ class Customers extends Model
 {
     use HasFactory;
 
+    protected $table = 'customers'; // Optional if your table is already named correctly
+    protected $primaryKey = 'cust_id';
+
+    public $timestamps = true; // or false depending on your table
+    public $incrementing = true; // or false if you use UUIDs
+    protected $keyType = 'int'; // or 'string' for UUIDs
+
     protected $fillable = ['name', 'email'];
+
+    public function getRouteKeyName()
+    {
+        return 'cust_id';
+    }
 
     public function purchases()
     {

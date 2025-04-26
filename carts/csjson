@@ -1,0 +1,22 @@
+{
+    "cart_id": "cart_680d1dfda39299.13227114",
+    "data": {
+        "items": [
+            {
+                "id": 3,
+                "name": "Salomon Tee Outlife ",
+                "price": 1500,
+                "quantity": 2
+            },
+            {
+                "id": 2,
+                "name": "Salomon Shoes Alphacross ",
+                "price": 4200,
+                "quantity": 1
+            }
+        ],
+        "total": "7200.00",
+        "count": "2",
+        "cart_id": "cart_680d1dfda39299.13227114"
+    }
+}

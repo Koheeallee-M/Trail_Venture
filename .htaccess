@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Allow direct access to checkout.php
+RewriteRule ^checkout\.php$ checkout.php [L]
+
+# API routing (this is fine)
+RewriteRule ^api/cart$ api/api.php [L,QSA]

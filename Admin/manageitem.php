@@ -25,32 +25,31 @@ require_once '../includes/dbconnect.php';
     <?php endif; ?>
 
     <div class="actions">
-        <a href="createbooking.php" class="btn btn-success">Add New Booking</a>
+        <a href="createitem.php" class="btn btn-success">Add New Booking</a>
     </div>
 
     <?php
-    $fetchbookings = "SELECT * FROM `bookings`";
-    $result = $conn->query($fetchbookings);
+    $fetchitem = "SELECT * FROM `item`";
+    $result = $conn->query($fetchitem);
     if($result->num_rows > 0) {
         echo "<table>";
         echo "<thead><tr>" .
-             "<th>Venue</th>" .
-             "<th>Date</th>" .
-             "<th>Start</th>" .
-             "<th>Length</th>" .
+             "<th>Item ID</th>" .
+             "<th>Item Name</th>" .
              "<th>Price</th>" .
-             "<th>Tour Guide</th>" .
+             "<th>Description</th>" .
+             "<th>QtyInStock</th>" .
              "<th>Image</th>" .
              "</tr></thead><tbody>";
         while($row = $result->fetch_assoc()) {
             $imgPath = '../images/' . htmlspecialchars($row['image']);
             echo "<tr>";
-            echo "<td data-label=\"Venue\">" . htmlspecialchars($row['venue']) . "</td>";
-            echo "<td data-label=\"Date\">" . htmlspecialchars($row['date']) . "</td>";
-            echo "<td data-label=\"Start\">" . htmlspecialchars($row['start']) . "</td>";
-            echo "<td data-label=\"Length\">" . htmlspecialchars($row['length']) . "</td>";
-            echo "<td data-label=\"Price\">" . htmlspecialchars($row['price']) . "</td>";
-            echo "<td data-label=\"Tour Guide\">" . htmlspecialchars($row['tour_guide']) . "</td>";
+            echo "<td data-label=\"Item ID\">" . htmlspecialchars($row['item_id']) . "</td>";
+            echo "<td data-label=\"Item Name\">" . htmlspecialchars($row['item_name']) . "</td>";
+            echo "<td data-label=\"Price\">" . htmlspecialchars($row['list_price']) . "</td>";
+            echo "<td data-label=\"Description\">" . htmlspecialchars($row['description']) . "</td>";
+            echo "<td data-label=\"QtyInStock\">" . htmlspecialchars($row['qtyInStock']) . "</td>";
+            echo "<td data-label=\"Phone\">" . htmlspecialchars($row['tour_guide']) . "</td>";
             echo "<td data-label=\"Image\"><img src='" . $imgPath . "' alt='Booking Image' style='max-width:100px; height:auto;'></td>";
             echo "<td data-label=\"Actions\">";
             echo "<a href='editbooking.php?venue=" . urlencode($row['venue']) . "' class='btn btn-primary'>Edit</a>";

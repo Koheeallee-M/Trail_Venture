@@ -75,11 +75,12 @@ header .icon-cart span {
 
 .listProduct {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 50px;
-    align-items: center;
     justify-content: center;
-    margin-left: 22%;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
 }
 
 .listProduct .item {
@@ -279,3 +280,42 @@ button:active {
     background-color: #E8BC0E;
     transform: scale(0.98);
 }
+
+.search-container {
+    position: relative;
+    width: 300px;
+    margin: 20px auto;
+}
+
+.search-container i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: gray;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px 10px 10px 35px; /* more space for icon */
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#searchInput:focus {
+    border-color: #666;
+}
+
+.no-item-message {
+    text-align: center;
+    color: #555;
+    font-size: 20px;
+    margin-top: 30px;
+    font-style: italic;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+

@@ -49,7 +49,29 @@ require_once 'includes/dbconnect.php'; // Database connection file
             $(".icon-cart span").text(uniqueItemCount);
         }
 
-            $(".addCart").click(function(){
+        $("#searchInput").on("keyup", function() {
+            var searchTerm = $(this).val().toLowerCase();
+            var hasVisibleItem = false;
+
+            $(".no-item-message").remove();
+            
+            $(".listProduct .item").each(function() {
+                var itemName = $(this).find("h2").text().toLowerCase();
+                if (itemName.includes(searchTerm)) {
+                    $(this).show();
+                    hasVisibleItem = true;
+                } else {
+                    $(this).hide();
+                }
+            });
+
+            if (!hasVisibleItem) {
+                $(".listProduct").append('<div class="no-item-message">No item found</div>');
+            }
+        });
+
+
+        $(".addCart").click(function(){
                 var item = $(this).closest(".item");
                 var name = item.find("h2").text();
                 var price = parseFloat(item.find(".price").text().replace("Rs", "").trim());    
@@ -246,6 +268,12 @@ require_once 'includes/dbconnect.php'; // Database connection file
     
     <div class="container">
 
+    <div class="search-container">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" id="searchInput" placeholder="Search for products...">
+</div>
+
+
         <header>
           <div class="horizontal_bar"> 
             <div class="title">PRODUCT LIST</div> 
@@ -283,11 +311,6 @@ require_once 'includes/dbconnect.php'; // Database connection file
             <button class="addCart">Add To Cart</button>
            </div>
 
-        </div>
-        
-        <br><br><br>
-
-        <div class="listProduct">
             <div class="item" data-id="4" data-price="3400">
              <img src="images/pants.jpg" alt="">
              <h2>Salomon Pants Outrack</h2>

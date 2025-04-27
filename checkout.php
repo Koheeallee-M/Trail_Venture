@@ -72,10 +72,7 @@ $errors = [];
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
      // Declare cartData globally
-    $(document).ready(function() {
-
-    // Fetch cart data only when View Orders button is clicked
-    $('#view-orders-btn').click(function() {
+     $(document).ready(function() {
         $.ajax({
             url: 'api/cart',
             method: 'GET',
@@ -86,12 +83,11 @@ $errors = [];
                     const cartData = response.data.data;
                     console.log("Cart ID:", cartData.cart_id);
 
-                    // Clear previous items
+                    // Clear previous items and append new ones
                     $('#cart-items').empty();
 
                     let totalPrice = 0;
                     let totalQuantity = 0;
-
 
                     cartData.items.forEach(item => {
                         const itemTotal = item.price * item.quantity;
@@ -107,13 +103,17 @@ $errors = [];
                             </div>
                         `);
                     });
-                    
+
+                    // Append total summary
                     $('#cart-items').append(`
-                <div class="total-summary">
-                    <div>Total Quantity: ${totalQuantity}</div>
-                    <div>Total Price: Rs ${totalPrice.toFixed(2)}</div>
-                </div>
-            `);
+                        <div class="total-summary">
+                            <div>Total Quantity: ${totalQuantity}</div>
+                            <div>Total Price: Rs ${totalPrice.toFixed(2)}</div>
+                        </div>
+                    `);
+
+                    // Initially hide the cart items
+                    $('#cart-items').hide();
                 } else {
                     alert('Error: Invalid cart data received.');
                 }
@@ -124,9 +124,14 @@ $errors = [];
                 alert('Error loading cart data.');
             }
         });
-    });
+
+        // Function to show the cart when "View Orders" button is clicked
+        $('#view-orders-btn').click(function() {
+            $('#cart-items').show();
+        });
 
 });
+
 
 </script>
 </head>
@@ -235,6 +240,7 @@ $errors = [];
   function ProcessTransaction() {
     openPopup();
     
+    localStorage.clear();
     fetch('save_cart.php', {
         method: 'POST',
         headers: {

@@ -215,8 +215,8 @@ $errors = [];
             <img src="images/check.png">
             <h2>Purchase Confirmed!</h2>
             <p>Your details have been successfully submitted.</p>
-            <button type="button" onclick="closePopup()">OK</button>
-            <a href="shop.php" class="continue-shopping">Continue Shopping</a>
+            <a href="shop.php"><button type="button" onclick="closePopup()">OK</button></a>
+            <!--<a href="shop.php" class="continue-shopping">Continue Shopping</a>-->
 </div>
 
 

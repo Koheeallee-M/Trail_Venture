@@ -1,12 +1,18 @@
 {
-    "cart_id": "cart_680d1dfda39299.13227114",
+    "cart_id": "cart_680df0aadeb397.55934002",
     "data": {
         "items": [
+            {
+                "id": 1,
+                "name": "Salomon Outlife Bottle 550Ml ",
+                "price": 690,
+                "quantity": 1
+            },
             {
                 "id": 3,
                 "name": "Salomon Tee Outlife ",
                 "price": 1500,
-                "quantity": 2
+                "quantity": 1
             },
             {
                 "id": 2,
@@ -15,8 +21,8 @@
                 "quantity": 1
             }
         ],
-        "total": "7200.00",
-        "count": "2",
-        "cart_id": "cart_680d1dfda39299.13227114"
+        "total": "6390.00",
+        "count": "3",
+        "cart_id": "cart_680df0aadeb397.55934002"
     }
 }

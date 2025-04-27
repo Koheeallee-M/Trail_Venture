@@ -1,5 +1,5 @@
 {
-    "cart_id": "cart_680df0aadeb397.55934002",
+    "cart_id": "cart_680d668f394e47.43505822",
     "data": {
         "items": [
             {
@@ -12,7 +12,7 @@
                 "id": 3,
                 "name": "Salomon Tee Outlife ",
                 "price": 1500,
-                "quantity": 1
+                "quantity": 2
             },
             {
                 "id": 2,
@@ -21,8 +21,8 @@
                 "quantity": 1
             }
         ],
-        "total": "6390.00",
-        "count": "3",
-        "cart_id": "cart_680df0aadeb397.55934002"
+        "total": "7200.00",
+        "count": "2",
+        "cart_id": "cart_680d1dfda39299.13227114"
     }
 }

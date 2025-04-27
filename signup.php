@@ -86,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param("ssssss", $username, $first_name, $last_name, $email, $phone, $address);
             if ($stmt->execute()) {
                 echo "Registration successful!";
+                $cust_id = $stmt->insert_id;
                 $_SESSION['userName'] = $username;
                 $_SESSION['firstName'] = $first_name;
                 $_SESSION['lastName'] = $last_name;
